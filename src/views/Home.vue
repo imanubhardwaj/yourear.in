@@ -169,6 +169,7 @@ export default {
             }
 
             #contact .subheading {
+                margin-top: 0;
                 @include fx-layout-with-gap(row, 10px);
 
                 a {

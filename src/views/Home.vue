@@ -14,15 +14,17 @@
         </nav>
         <div class="content">
             <div id="intro">
-                  <span class="heading">Welcome</span>
-                  <span class="subheading">
-                      Thanks for dropping by, we'd love to be of help.<br><br>
-                      We at Your Ear, try to make sure that you are heard. We try to understand each and everything
-                      that has ever caused trouble and we help you deal with those things with grace.
-                  </span>
+                <span class="heading">Welcome</span>
+                <br>
+                <span class="subheading">
+                    Thanks for dropping by, we'd love to be of help.<br><br>
+                    We at Your Ear, try to make sure that you are heard. We try to understand each and everything
+                    that has ever caused trouble and we help you deal with those things with grace.
+                </span>
               </div>
             <div id="about">
                 <span class="heading">About</span>
+                <br>
                 <span class="subheading">
                       We started Your Ear to help people to build a connection with people where they feel valued
                       and so that they can share all that has been unheard until now, we want to be that ear, we want to be
@@ -42,12 +44,12 @@
             <div id="contact">
                 <span class="heading">Contact</span>
                 <br>
-                <span class="subheading">
-                    Email: <a :href="`mailto:${email}`" target="_blank" rel="noreferrer">{{email}}</a>
-                </span>
-                <span class="subheading">
-                    Phone: <a :href="`tel:${phone}`">{{phone}}</a>
-                </span>
+                <p class="subheading">
+                    <span>Email:</span> <a :href="`mailto:${email}`" target="_blank" rel="noreferrer">{{email}}</a>
+                </p>
+                <p class="subheading">
+                    <span>Phone:</span> <a :href="`tel:${phone}`">{{phone}}</a>
+                </p>
               </div>
           </div>
       </div>
@@ -166,8 +168,12 @@ export default {
                 }
             }
 
-            #contact a {
-                color: $primary;
+            #contact .subheading {
+                @include fx-layout-with-gap(row, 10px);
+
+                a {
+                    color: $primary;
+                }
             }
         }
     }

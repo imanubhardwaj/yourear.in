@@ -1,9 +1,11 @@
 <template>
   <div class="home">
       <div class="brand">
-          <img class="logo" src="../assets/img/logo-white.svg" alt="Logo">
-          <h1 class="title">Your Ear</h1>
-          <h2 class="subtitle">Here To Hear You</h2>
+          <div class="container">
+              <img class="logo" src="../assets/img/logo-white.svg" alt="Logo">
+              <h1 class="heading">Your Ear</h1>
+              <h2 class="subtitle">Here To Hear You</h2>
+          </div>
       </div>
       <div class="container">
         <nav>
@@ -31,7 +33,7 @@
                       <b>Your Ear</b>.<br><br>
 
                       It all started with counselling of few young kids and now we're open to all age groups. We just
-                      want to help. SELFLESSLY. All we want to make out of this is, some really good relations with
+                      want to help. All we want to make out of this is, some really good relations with
                       whom we interact.<br><br>
 
                       We don't charge money, not a single penny. All we charge you is some love, smiles and
@@ -50,6 +52,11 @@
                 <p class="subheading">
                     <span>Phone:</span> <a :href="`tel:${phone}`">{{phone}}</a>
                 </p>
+                <p class="subheading">
+                    <span>Hesitant to start conversation? We love to do it.</span>
+                </p>
+                <v-btn class="form-btn" @click="openContactDialog">Fill Details</v-btn>
+                <Contact :show-contact-dialog="showContactDialog" @close="showContactDialog = false"></Contact>
               </div>
           </div>
       </div>
@@ -57,24 +64,24 @@
 </template>
 
 <script>
+import Contact from "../components/Contact";
+
 export default {
   name: 'Home',
-  data: function () {
+    components: {Contact},
+    data: function () {
     return {
         testimonials: [
             {}
         ],
         phone: "+919718282486",
         email: "manubhardwaj@yahoo.com",
-        contactForm: {
-            name: "",
-            contact: ""
-        }
+        showContactDialog: false
     };
   },
   methods: {
-      saveDetails() {
-          console.log(this.contactForm);
+      openContactDialog() {
+          this.showContactDialog = true;
       }
   }
 }
@@ -96,26 +103,34 @@ export default {
     }
 
     .brand {
+        position: relative;
         background-color: $primary;
-        @include fx-layout-with-gap(column, 10px);
+        @include fx-layout(row);
         @include fx-layout-alignment(center, center);
 
-        > * {
-            margin-top: 0;
-            color: $secondary;
-        }
+        .container {
+            @include absCenter();
+            @include fx-layout-with-gap(column, 10px);
+            @include fx-layout-alignment(center, center);
 
-        img.logo {
-            height: 64px;
-            width: 64px;
-        }
+            > * {
+                margin-top: 0;
+                color: $secondary;
+            }
 
-        h1.title {
-            font-size: $title;
-        }
+            img.logo {
+                height: 64px;
+                width: 64px;
+            }
 
-        h2.subtitle {
-            font-size: $subtitle;
+            h1.heading {
+                font-size: $title;
+                margin-bottom: 0;
+            }
+
+            h2.subtitle {
+                font-size: $subtitle;
+            }
         }
     }
 
@@ -125,7 +140,7 @@ export default {
         @include fx-layout-alignment(flex-start, stretch);
 
         nav {
-            width: 100%;
+            width: calc(100% - 2px);
             height: 64px;
             padding: 0 20px;
             box-sizing: border-box;
@@ -146,6 +161,14 @@ export default {
             flex: 1;
             overflow-y: scroll;
             scroll-behavior: smooth;
+
+            /* Hide Scrollbar */
+            -ms-overflow-style: none;  /* IE and Edge */
+            scrollbar-width: none;  /* Firefox */
+
+            &::-webkit-scrollbar {
+                display: none;
+            }
 
             #intro, #about, #testimonials, #contact {
                 height: 100%;
@@ -171,10 +194,16 @@ export default {
             #contact .subheading {
                 margin-top: 0;
                 @include fx-layout-with-gap(row, 10px);
+                @include fx-layout-alignment(flex-start, flex-end);
 
                 a {
                     color: $primary;
                 }
+            }
+
+            .form-btn {
+                background-color: $primary;
+                color: $secondary;
             }
         }
     }

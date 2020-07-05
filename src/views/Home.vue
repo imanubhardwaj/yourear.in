@@ -41,8 +41,21 @@
                 </span>
               </div>
             <div id="testimonials">
-                  <div></div>
-              </div>
+                <span class="heading">Testimonials</span>
+                <span class="subheading">
+                    We have been extremely fortunate to have made so many connections and yet
+                    receiving such level of appreciation for our work.
+                </span>
+                <b>Your appreciation is our motivation.</b>
+                <v-carousel cycle height="300" interval="5000" hide-delimiter-background show-arrows-on-hover>
+                    <v-carousel-item v-for="testimonial in testimonials" :key="testimonial.user">
+                        <div class="testimonial">
+                            <span class="text">{{testimonial.text}}</span>
+                            <span class="user">{{testimonial.user}}</span>
+                        </div>
+                    </v-carousel-item>
+                </v-carousel>
+            </div>
             <div id="contact">
                 <span class="heading">Contact</span>
                 <br>
@@ -72,7 +85,16 @@ export default {
     data: function () {
     return {
         testimonials: [
-            {}
+            {
+                text: "They counselled my son Kunal and literally transformed him into a completely different person." +
+                      " I just can't thank them enough.",
+                user: "Beena Gill - New York, USA"
+            },
+            {
+                text: "My daughter Gaurisha wasn't able to find the right track in life and was lost for quite some time." +
+                    " I got her counselled and I could notice the changes in her right from the day one. They're great!",
+                user: "Supriya Sharma - Gurgaon, IN"
+            }
         ],
         phone: "+919718282486",
         email: "manubhardwaj@yahoo.com",
@@ -177,7 +199,7 @@ export default {
                 @include fx-layout-alignment(center, flex-start);
             }
 
-            #intro, #about, #contact {
+            #intro, #about, #testimonials, #contact {
                 @include fx-layout-with-gap(column, 20px);
 
                 .heading {
@@ -191,19 +213,42 @@ export default {
                 }
             }
 
-            #contact .subheading {
-                margin-top: 0;
-                @include fx-layout-with-gap(row, 10px);
-                @include fx-layout-alignment(flex-start, flex-end);
+            #testimonials .testimonial {
+                height: 100%;
+                padding: 0 20px;
+                box-sizing: border-box;
+                @include fx-layout-with-gap(column, 15px);
+                @include fx-layout-alignment(center, center);
 
-                a {
+                span {
                     color: $primary;
+                }
+
+                .text {
+                    font-size: large;
+                    font-style: italic;
+                }
+
+                .user {
+                    font-size: $normal;
                 }
             }
 
-            .form-btn {
-                background-color: $primary;
-                color: $secondary;
+            #contact {
+                .subheading {
+                    margin-top: 0;
+                    @include fx-layout-with-gap(row, 10px);
+                    @include fx-layout-alignment(flex-start, flex-end);
+
+                    a {
+                        color: $primary;
+                    }
+                }
+
+                .form-btn {
+                    background-color: $primary;
+                    color: $secondary;
+                }
             }
         }
     }

@@ -1,11 +1,9 @@
 <template>
   <div class="home">
       <div class="brand">
-          <div class="container">
-              <img class="logo" src="../assets/img/logo-white.svg" alt="Logo">
-              <h1 class="heading">Your Ear</h1>
-              <h2 class="subtitle">Here To Hear You</h2>
-          </div>
+          <img class="logo" src="../assets/img/logo-white.svg" alt="Logo">
+          <h1 class="heading">Your Ear</h1>
+          <h2 class="subtitle">Here To Hear You</h2>
       </div>
       <div class="container">
         <nav>
@@ -125,34 +123,27 @@ export default {
     }
 
     .brand {
-        position: relative;
         background-color: $primary;
-        @include fx-layout(row);
+        @include fx-layout-with-gap(column, 10px);
         @include fx-layout-alignment(center, center);
 
-        .container {
-            @include absCenter();
-            @include fx-layout-with-gap(column, 10px);
-            @include fx-layout-alignment(center, center);
+        > * {
+            margin-top: 0;
+            color: $secondary;
+        }
 
-            > * {
-                margin-top: 0;
-                color: $secondary;
-            }
+        img.logo {
+            height: 64px;
+            width: 64px;
+        }
 
-            img.logo {
-                height: 64px;
-                width: 64px;
-            }
+        h1.heading {
+            font-size: $title;
+            margin-bottom: 0;
+        }
 
-            h1.heading {
-                font-size: $title;
-                margin-bottom: 0;
-            }
-
-            h2.subtitle {
-                font-size: $subtitle;
-            }
+        h2.subtitle {
+            font-size: $subtitle;
         }
     }
 

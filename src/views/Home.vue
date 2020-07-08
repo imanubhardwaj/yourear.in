@@ -13,6 +13,11 @@
             <a href="#contact">Contact</a>
         </nav>
         <div class="content">
+            <div class="brand">
+                <img class="logo" src="../assets/img/logo-white.svg" alt="Logo">
+                <h1 class="heading">Your Ear</h1>
+                <h2 class="subtitle">Here To Hear You</h2>
+            </div>
             <div id="intro">
                 <span class="heading">Welcome</span>
                 <br>
@@ -183,6 +188,10 @@ export default {
                 display: none;
             }
 
+            .brand {
+                display: none;
+            }
+
             #intro, #about, #testimonials, #contact {
                 height: 100%;
                 padding: 0 40px;
@@ -239,6 +248,37 @@ export default {
                 .form-btn {
                     background-color: $primary;
                     color: $secondary;
+                }
+            }
+        }
+    }
+
+    @include respond-below(sm) {
+        @include fx-layout(column);
+
+        > .brand {
+            display: none;
+        }
+
+        .container {
+            padding: 0;
+            height: 100%;
+
+            nav {
+                width: 100%;
+                left: unset;
+                transform: unset;
+            }
+
+            .content {
+                margin-top: 64px;
+
+                > * {
+                    height: 100%;
+                }
+
+                .brand {
+                    display: flex;
                 }
             }
         }

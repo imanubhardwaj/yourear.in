@@ -277,6 +277,7 @@ export default {
                 width: 100%;
                 left: unset;
                 transform: unset;
+                position: fixed;
             }
 
             .content {

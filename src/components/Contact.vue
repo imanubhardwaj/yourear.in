@@ -12,7 +12,8 @@
             <v-card-actions>
                 <v-spacer></v-spacer>
                 <v-btn text @click="$emit('close')">Cancel</v-btn>
-                <v-btn class="submit-btn" color="primary" text @click="submit">Submit</v-btn>
+                <v-progress-circular v-if="loading" size="20" width="2" indeterminate></v-progress-circular>
+                <v-btn v-else class="submit-btn" color="primary" text @click="submit">Submit</v-btn>
             </v-card-actions>
         </v-card>
     </v-dialog>
@@ -26,16 +27,31 @@ export default {
     },
     data: function () {
         return {
-            contactForm: {
-                name: "",
-                contact: ""
-            },
-            dialogWidth: this.$vuetify.breakpoint === "xs" ? "300px" : "500px"
+            contactForm: this.getInitialForm(),
+            dialogWidth: this.$vuetify.breakpoint === "xs" ? "300px" : "500px",
+            loading: false
         };
     },
     methods: {
+        getInitialForm() {
+            return {
+                name: "",
+                contact: ""
+            };
+        },
         submit() {
-            console.log(this.contactForm);
+            const url = "https://your-ear.firebaseio.com/contacts.json";
+            const options = {
+                method: "POST",
+                body: JSON.stringify(this.contactForm)
+            };
+            this.loading = true;
+            fetch(url, options).then(() => {
+                this.loading = false;
+                this.$emit('close');
+                this.$emit('formFilled');
+                this.contactForm = this.getInitialForm();
+            });
         }
     }
 }
@@ -54,9 +70,18 @@ export default {
         padding: 10px 20px 0 20px;
     }
 
-    button.submit-btn {
-        background-color: #383838;
-        color: white !important;
+    .v-card__actions {
+        padding: 8px 20px 16px 20px;
+
+        button.submit-btn {
+            background-color: #383838;
+            color: white !important;
+        }
+
+        .v-progress-circular {
+            width: 84px !important;
+            height: 36px !important;
+        }
     }
 }
 </style>

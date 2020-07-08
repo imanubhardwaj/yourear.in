@@ -72,7 +72,15 @@
                     <span>Hesitant to start conversation? We love to do it.</span>
                 </p>
                 <v-btn class="form-btn" @click="openContactDialog">Fill Details</v-btn>
-                <Contact :show-contact-dialog="showContactDialog" @close="showContactDialog = false"></Contact>
+                <Contact :show-contact-dialog="showContactDialog" @formFilled="showContactSnackbar = true"
+                         @close="showContactDialog = false">
+                </Contact>
+                <v-snackbar v-model="showContactSnackbar">
+                    Thankyou! We'll soon be in touch with you.
+                    <template v-slot:action="{ attrs }">
+                        <v-btn color="pink" text v-bind="attrs" @click="showContactSnackbar = false">Close</v-btn>
+                    </template>
+                </v-snackbar>
               </div>
           </div>
       </div>
@@ -101,7 +109,8 @@ export default {
         ],
         phone: "+919718282486",
         email: "manubhardwaj@yahoo.com",
-        showContactDialog: false
+        showContactDialog: false,
+        showContactSnackbar: false
     };
   },
   methods: {

@@ -4,7 +4,7 @@ import Vuetify from 'vuetify/lib';
 Vue.use(Vuetify);
 
 const colors = Object.freeze({
-    primary: '#383838',
+    primary: '#1A6577',
     secondary: '#ffffff',
     accent: '#383838',
     error: '#b71c1c',

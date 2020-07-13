@@ -180,7 +180,7 @@ export default {
 
             a {
                 text-decoration: none;
-                color: $primary;
+                color: $accent;
             }
         }
 
@@ -230,7 +230,7 @@ export default {
                 @include fx-layout-alignment(center, center);
 
                 span {
-                    color: $primary;
+                    color: $accent;
                 }
 
                 .text {
@@ -250,7 +250,7 @@ export default {
                     @include fx-layout-alignment(flex-start, flex-end);
 
                     a {
-                        color: $primary;
+                        color: $accent;
                     }
                 }
 

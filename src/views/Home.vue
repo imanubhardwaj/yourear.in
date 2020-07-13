@@ -92,8 +92,8 @@ import Contact from "../components/Contact";
 
 export default {
   name: 'Home',
-    components: {Contact},
-    data: function () {
+  components: {Contact},
+  data: function () {
     return {
         testimonials: [
             {
@@ -114,9 +114,18 @@ export default {
     };
   },
   methods: {
+      scrollToSection({hash}) {
+          if (!hash) {
+              return;
+          }
+          document.querySelector(hash).scrollIntoView();
+      },
       openContactDialog() {
           this.showContactDialog = true;
       }
+  },
+  mounted() {
+      this.scrollToSection(this.$route);
   }
 }
 </script>

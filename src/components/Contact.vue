@@ -1,5 +1,5 @@
 <template>
-    <v-dialog :width="dialogWidth" v-model="showContactDialog" @click:outside="$emit('close')">
+    <v-dialog persistent :width="dialogWidth" v-model="showContactDialog">
         <v-card>
             <v-card-title class="headline" primary-title>Contact</v-card-title>
 
@@ -40,10 +40,14 @@ export default {
             };
         },
         submit() {
+            const {name, contact} = this.contactForm;
+            if (!name || !contact) {
+                return;
+            }
             const url = "https://your-ear.firebaseio.com/contacts.json";
             const options = {
                 method: "POST",
-                body: JSON.stringify(this.contactForm)
+                body: JSON.stringify({name, contact})
             };
             this.loading = true;
             fetch(url, options).then(() => {
@@ -74,7 +78,7 @@ export default {
         padding: 8px 20px 16px 20px;
 
         button.submit-btn {
-            background-color: #383838;
+            background-color: $primary;
             color: white !important;
         }
 
